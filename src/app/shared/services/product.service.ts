@@ -35,7 +35,6 @@ export class ProductService {
   }
 
   public createProduct(product: ProductModel): Observable<any> {
-    console.log(product)
     const productJSON = {
       id: product.id,
       name: product.name,
@@ -44,8 +43,20 @@ export class ProductService {
       date_release: product.dateRelease,
       date_revision: product.dateRevision
     }
-    console.log(productJSON)
     return this.httpClient
       .post(`${environment.apiUrl}/products`, productJSON, { headers: this.headers })
+  }
+
+  public updateProduct(product: ProductModel): Observable<any> {
+    const productJSON = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      logo: product.logo,
+      date_release: product.dateRelease,
+      date_revision: product.dateRevision
+    }
+    return this.httpClient
+      .put(`${environment.apiUrl}/products`, productJSON, { headers: this.headers })
   }
 }

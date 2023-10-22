@@ -5,6 +5,12 @@ import { BehaviorSubject, Observable, of } from "rxjs"
 import { IAPIResults } from "src/app/shared/interfaces/api-result.interface";
 import { ProductModel } from "src/app/shared/models/product.model";
 import { Router } from "@angular/router";
+import { HttpParams } from "@angular/common/http";
+
+enum MENU_OPTIONS {
+  EDIT = "edit",
+  DELETE = "delete"
+}
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +24,16 @@ export class ProductListComponent implements OnInit {
   rows: number = 5
   page: number = 1
   rowsPerPage: number[] = [5, 10, 20]
+  menu = [
+    {
+      url: MENU_OPTIONS.EDIT,
+      label: "Editar"
+    },
+    {
+      url: MENU_OPTIONS.DELETE,
+      label: "Eliminar"
+    }
+  ]
 
   records: IAPIResults<ProductModel> = {
     totalRecords: 0,
@@ -58,7 +74,22 @@ export class ProductListComponent implements OnInit {
   }
 
   createProduct(): void {
-    this.router.navigate(["/products/create"], { queryParams: { product: null}})
+    this.router.navigate(["/products/create"], { queryParams: { product: null } })
+  }
+
+  editProduct(product: ProductModel): void {
+    this.router.navigate(["/products/edit"], { queryParams: { product: JSON.stringify(product) } })
+  }
+
+  handleActions(url, product): void {
+    if (url == MENU_OPTIONS.EDIT) {
+      this.editProduct(product)
+      return
+    }
+    if (url == MENU_OPTIONS.DELETE) {
+      //delete
+      return
+    }
   }
 
 }

@@ -12,6 +12,7 @@
           <th>Descripción</th>
           <th>Fecha de liberación</th>
           <th>Fecha de reestructuración</th>
+          <th></th>
         </tr>
       </thead>
       <tbody class="table-body">
@@ -25,6 +26,13 @@
           <td>{{item["description"]}}</td>
           <td>{{item["dateRelease"] | date: 'dd/MM/yyyy'}}</td>
           <td>{{item["dateRevision"] | date: 'dd/MM/yyyy'}}</td>
+          <td>
+            <select #selectOptions (change)="handleActions(selectOptions.value, item)">
+              <option [value]="null"></option>
+              <option *ngFor="let menuItem of menu" [value]="menuItem.url">
+                {{menuItem.label}}</option>
+            </select>
+          </td>
         </tr>
       </tbody>
     </table>
