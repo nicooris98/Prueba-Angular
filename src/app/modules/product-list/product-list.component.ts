@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from "src/app/shared/services/product.service";
-import { BehaviorSubject, Observable, of } from "rxjs"
 import { IAPIResults } from "src/app/shared/interfaces/api-result.interface";
 import { ProductModel } from "src/app/shared/models/product.model";
 import { Router } from "@angular/router";
-import { HttpParams } from "@angular/common/http";
 
 enum MENU_OPTIONS {
   EDIT = "edit",
