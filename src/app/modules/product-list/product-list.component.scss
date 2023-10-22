@@ -1,0 +1,72 @@
+:host {
+  width: 100%;
+}
+
+.container-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  .search-bar {
+    input {
+      height: 2rem;
+      border-radius: 5px;
+      width: 30%;
+      min-width: 100px;
+    }
+  }
+
+  .list {
+    padding: 10px;
+    background: #fff;
+    width: 100%;
+
+    .table-prod {
+      border-spacing:0;
+      width: 100%;
+      tr {
+        height: 50px;
+      }
+
+      .table-head {
+        background: rgb(229, 236, 245);
+
+        tr {
+          th {
+            vertical-align: middle;
+          }
+        }
+      }
+
+      .table-body {
+        background: #fff;
+
+        .table-item {
+          td {
+            vertical-align: middle;
+            text-align: center;
+            img {
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+            }
+            border-bottom: 1px solid black !important;
+          }
+        }
+      }
+    }
+    .table-footer {
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      .paginator {
+        select {
+          width: 75px;
+          height: 25px;
+          text-align: center;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}

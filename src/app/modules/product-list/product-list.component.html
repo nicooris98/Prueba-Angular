@@ -1,1 +1,42 @@
-<p>product-list works!</p>
+<div class="container-list">
+  <div class="search-bar">
+    <input type="text" placeholder="Search">
+  </div>
+  <div class="list">
+    <table class="table-prod">
+      <thead class="table-head">
+        <tr>
+          <th>Logo</th>
+          <th>Nombre del producto</th>
+          <th>Descripción</th>
+          <th>Fecha de liberación</th>
+          <th>Fecha de reestructuración</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        <tr class="table-item" *ngFor="let item of records.data">
+          <td>
+            <img
+              [src]="item['logo'][0]+item['logo'][1]+item['logo'][2]+item['logo'][3] !== 'http' ? '../../../../assets/defaultpng.png' : item['logo']"
+              onerror="this.src='../../../../assets/defaultpng.png'" />
+          </td>
+          <td>{{item["name"]}}</td>
+          <td>{{item["description"]}}</td>
+          <td>{{item["dateRelease"] | date: 'dd/MM/yyyy'}}</td>
+          <td>{{item["dateRevision"] | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-footer">
+      <div class="total">
+        <p>{{records.totalRecords}} Resultados</p>
+      </div>
+      <div class="paginator">
+        <select #selectRows (change)="handleOption(selectRows.value)">
+          <option *ngFor="let pageOption of rowsPerPage" [value]="pageOption">
+            {{pageOption}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
