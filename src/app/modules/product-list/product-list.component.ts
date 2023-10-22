@@ -40,6 +40,12 @@ export class ProductListComponent implements OnInit {
     data: []
   }
 
+  showModal: boolean = false
+  selectedProduct: ProductModel = null
+  textModal: string = ""
+  showModalSuccess: boolean = false
+  showModalError: boolean = false
+
   constructor(
     private productService: ProductService,
     private router: Router
@@ -87,9 +93,36 @@ export class ProductListComponent implements OnInit {
       return
     }
     if (url == MENU_OPTIONS.DELETE) {
-      //delete
+      this.selectedProduct = product
+      this.showModal = true
       return
     }
+  }
+
+  cancelModal(): void {
+    this.showModal = false
+    this.selectedProduct = null
+  }
+
+  confirmDelete(): void {
+    this.productService.deleteProduct(this.selectedProduct.id).subscribe(res => {
+      if(res) {
+        this.loadData()
+        this.textModal = "Producto elminado con exito!"
+        this.showModalSuccess = true
+        setTimeout(() => {
+          this.showModalSuccess = false
+        }, 2000);
+      }
+      else {
+        this.textModal = "Error al eliminar el producto"
+        this.showModalError = true
+        setTimeout(() => {
+          this.showModalError = false
+        }, 2000);
+      }
+      this.showModal = false
+    })
   }
 
 }

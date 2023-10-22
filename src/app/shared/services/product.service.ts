@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http"
-import { Observable, map } from "rxjs";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http"
+import { Observable, catchError, map, of, throwError } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { ProductModel } from "../models/product.model";
 import { IAPIResults } from "../interfaces/api-result.interface";
@@ -58,5 +58,17 @@ export class ProductService {
     }
     return this.httpClient
       .put(`${environment.apiUrl}/products`, productJSON, { headers: this.headers })
+  }
+
+  public deleteProduct(productId: string): Observable<any> {
+    return this.httpClient
+      .delete(`${environment.apiUrl}/products`, { headers: this.headers, params: { id: productId }})
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.error.text == "Product successfully removed") {
+            return of(true)
+          }
+          return of(false)
+        }))
   }
 }

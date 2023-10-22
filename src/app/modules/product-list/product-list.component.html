@@ -49,3 +49,26 @@
     </div>
   </div>
 </div>
+<div *ngIf="showModal" class="modal">
+  <div class="delete">
+    <div class="delete-title">
+      ¿Estas seguro de elminar el producto {{selectedProduct.name}}?
+    </div>
+    <div class="delete-actions">
+      <button (click)="cancelModal()" class="btn-cancel">Cancelar</button>
+      <button (click)="confirmDelete()" class="btn-delete">Confirmar</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModalSuccess" class="modal">
+  <div class="success">
+    <img src="../../../assets/okpng.png" alt="">
+    {{textModal}}
+  </div>
+</div>
+<div *ngIf="showModalError" class="modal">
+  <div class="error">
+    <img src="../../../assets/error.png" alt="">
+    {{textModal}}
+  </div>
+</div>
