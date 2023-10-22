@@ -7,6 +7,11 @@ const routes: Routes = [
       () => import("./modules/product-list/product-list.component")
         .then(c => c.ProductListComponent)
   },
+  {
+    path: "products/create", loadComponent:
+      () => import("./modules/product-edit/product-edit.component")
+        .then(c => c.ProductEditComponent)
+  },
   { path: "", pathMatch: "full", redirectTo: "products" },
   { path: "**", pathMatch: "full", redirectTo: "products" }
 ];

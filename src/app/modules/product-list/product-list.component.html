@@ -1,6 +1,7 @@
 <div class="container-list">
-  <div class="search-bar">
-    <input type="text" placeholder="Search">
+  <div class="action-bar">
+    <input type="text" placeholder="Search" (change)="handleChange($event)">
+    <button (click)="createProduct()">Agregar</button>
   </div>
   <div class="list">
     <table class="table-prod">
@@ -17,7 +18,7 @@
         <tr class="table-item" *ngFor="let item of records.data">
           <td>
             <img
-              [src]="item['logo'][0]+item['logo'][1]+item['logo'][2]+item['logo'][3] !== 'http' ? '../../../../assets/defaultpng.png' : item['logo']"
+              [src]="item['logo'].length > 3 && item['logo'][0]+item['logo'][1]+item['logo'][2]+item['logo'][3] !== 'http' ? '../../../../assets/defaultpng.png' : item['logo']"
               onerror="this.src='../../../../assets/defaultpng.png'" />
           </td>
           <td>{{item["name"]}}</td>

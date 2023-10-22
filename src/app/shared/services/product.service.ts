@@ -13,7 +13,7 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProductList(): Observable<IAPIResults<ProductModel[]>> {
+  public getProductList(): Observable<IAPIResults<ProductModel>> {
     return this.httpClient
       .get(`${environment.apiUrl}/products`, { headers: this.headers })
       .pipe(map((results: any[]) => Object.assign({}, {
@@ -26,6 +26,26 @@ export class ProductService {
           dateRelease: item.date_release,
           dateRevision: item.date_revision
         }))
-      }) as unknown as IAPIResults<ProductModel[]>))
+      }) as unknown as IAPIResults<ProductModel>))
+  }
+
+  public alreadyExists(testId: string): Observable<boolean> {
+    return this.httpClient
+      .get<boolean>(`${environment.apiUrl}/products/verification`, { headers: this.headers, params: { id: testId } })
+  }
+
+  public createProduct(product: ProductModel): Observable<any> {
+    console.log(product)
+    const productJSON = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      logo: product.logo,
+      date_release: product.dateRelease,
+      date_revision: product.dateRevision
+    }
+    console.log(productJSON)
+    return this.httpClient
+      .post(`${environment.apiUrl}/products`, productJSON, { headers: this.headers })
   }
 }

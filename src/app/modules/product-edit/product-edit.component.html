@@ -1,1 +1,71 @@
-<p>product-edit works!</p>
+<div class="form-container" (submit)="onSubmit()" novalidate>
+  <div class="form-title">
+    <h1>Formulario de Registro</h1>
+  </div>
+  <form class="product-form" [formGroup]="productForm">
+    <div class="row">
+      <div class="col">
+        <label for="id">ID: </label>
+        <input type="text" formControlName="id">
+        <div class="error-message" *ngIf="productForm.get('id').errors && productForm.get('id').touched">
+          ID inválido!
+        </div>
+        <div class="error-message" *ngIf="idAlreadyExists">
+          ID ya existe!
+        </div>
+      </div>
+      <div class="col">
+        <label for="name">Nombre: </label>
+        <input type="text" formControlName="name">
+        <div class="error-message" *ngIf="productForm.get('name').errors && productForm.get('name').touched">
+          Nombre inválido!
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="description">Descripción: </label>
+        <input type="text" formControlName="description">
+        <div class="error-message" *ngIf="productForm.get('description').errors && productForm.get('description').touched">
+          Descripción inválida!
+        </div>
+      </div>
+      <div class="col">
+        <label for="logo">Logo: </label>
+        <input type="text" formControlName="logo">
+        <div class="error-message" *ngIf="productForm.get('logo').errors && productForm.get('logo').touched">
+          Logo inválido!
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="dateRelease">Fecha de Liberación: </label>
+        <input type="date" formControlName="dateRelease" [min]="getCurrentDate()">
+        <div class="error-message" *ngIf="productForm.get('dateRelease').errors && productForm.get('dateRelease').touched">
+          Fecha de Liberación inválida!
+        </div>
+      </div>
+      <div class="col">
+        <label for="dateRevision">Fecha de Revisión: </label>
+        <input type="date" formControlName="dateRevision">
+        <div class="error-message" *ngIf="productForm.get('dateRevision').errors && productForm.get('dateRevision').touched">
+          Fecha de Revisión inválida!
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="btn-actions">
+        <button class="reset" type="button" (click)="resetForm()">Reinciar</button>
+        <button class="submit" type="submit">Enviar</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="showModal" class="modal-ok">
+  <div class="ok">
+    <img src="../../../assets/okpng.png" alt="">
+    Producto creado correctamente
+  </div>
+</div>
+<pre>{{ productForm.getRawValue() | json }}</pre>
