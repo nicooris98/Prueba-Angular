@@ -17,7 +17,7 @@ import { switchMap, of } from "rxjs";
 })
 export class ProductEditComponent implements OnInit {
 
-  productForm: FormGroup
+  productForm: FormGroup = this.defaultControls()
   idAlreadyExists: boolean = false
   isCreate: boolean = true
   showModal: boolean = false
@@ -36,14 +36,6 @@ export class ProductEditComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       if (Object.keys(params).length === 0) {
         this.isCreate = true
-        this.productForm = this.formBuilder.group({
-          id: new FormControl("", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])),
-          name: new FormControl("", Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100)])),
-          description: new FormControl("", Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(200)])),
-          logo: new FormControl("", Validators.compose([Validators.required])),
-          dateRelease: new FormControl(new Date(), Validators.compose([Validators.required])),
-          dateRevision: new FormControl(new Date(), Validators.compose([Validators.required]))
-        })
       } else {
         this.isCreate = false
         const editProduct: ProductModel = JSON.parse(params["product"])
@@ -66,9 +58,28 @@ export class ProductEditComponent implements OnInit {
     })
   }
 
+  defaultControls(): FormGroup {
+    return new FormGroup({
+      id: new FormControl("", Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])),
+      name: new FormControl("", Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100)])),
+      description: new FormControl("", Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(200)])),
+      logo: new FormControl("", Validators.compose([Validators.required])),
+      dateRelease: new FormControl(this.formatDate(new Date().toString()), Validators.compose([Validators.required])),
+      dateRevision: new FormControl(this.formatDatePlusOne(new Date().toString()), Validators.compose([Validators.required]))
+    })
+  }
+
   formatDate(original: string): string {
     const date = new Date(original)
     const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, "0")
+    const day = String(date.getDate()).padStart(2, "0")
+    return `${year}-${month}-${day}`
+  }
+
+  formatDatePlusOne(original: string): string {
+    const date = new Date(original)
+    const year = date.getFullYear()+1
     const month = String(date.getMonth() + 1).padStart(2, "0")
     const day = String(date.getDate()).padStart(2, "0")
     return `${year}-${month}-${day}`
@@ -83,7 +94,7 @@ export class ProductEditComponent implements OnInit {
 
   resetForm(): void {
     if (this.isCreate) {
-      this.productForm.reset()
+      this.productForm = this.defaultControls()
     } else {
       this.productForm.get("description").reset()
       this.productForm.get("name").reset()
@@ -115,7 +126,8 @@ export class ProductEditComponent implements OnInit {
           }, 1000)
         }
       })
-    } else {
+    }
+    if (this.productForm.valid && !this.isCreate) {
       this.productService.updateProduct(this.productForm.getRawValue()).subscribe(res => {
         if (Object.keys(res).length == 6) {
           this.showModal = true

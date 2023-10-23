@@ -56,13 +56,13 @@
     </div>
     <div class="row">
       <div class="btn-actions">
-        <button class="reset" type="button" (click)="resetForm()">Reinciar</button>
+        <button class="reset" type="button" (click)="resetForm()">Reiniciar</button>
         <button class="submit" type="submit">Enviar</button>
       </div>
     </div>
   </form>
 </div>
-<div *ngIf="showModal" class="modal-ok">
+<div *ngIf="showModal" class="modal-ok" id="modal-ok">
   <div class="ok">
     <img src="../../../assets/okpng.png" alt="">
     {{textModal}}

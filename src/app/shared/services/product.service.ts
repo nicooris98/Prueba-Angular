@@ -29,9 +29,9 @@ export class ProductService {
       }) as unknown as IAPIResults<ProductModel>))
   }
 
-  public alreadyExists(testId: string): Observable<boolean> {
+  public alreadyExists(productId: string): Observable<boolean> {
     return this.httpClient
-      .get<boolean>(`${environment.apiUrl}/products/verification`, { headers: this.headers, params: { id: testId } })
+      .get<boolean>(`${environment.apiUrl}/products/verification`, { headers: this.headers, params: { id: productId } })
   }
 
   public createProduct(product: ProductModel): Observable<any> {

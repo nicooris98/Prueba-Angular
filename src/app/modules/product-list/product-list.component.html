@@ -49,7 +49,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="showModal" class="modal">
+<div *ngIf="showModal" class="modal" id="modal-delete">
   <div class="delete">
     <div class="delete-title">
       ¿Estas seguro de elminar el producto {{selectedProduct.name}}?
@@ -60,13 +60,13 @@
     </div>
   </div>
 </div>
-<div *ngIf="showModalSuccess" class="modal">
+<div *ngIf="showModalSuccess" class="modal" id="modal-ok">
   <div class="success">
     <img src="../../../assets/okpng.png" alt="">
     {{textModal}}
   </div>
 </div>
-<div *ngIf="showModalError" class="modal">
+<div *ngIf="showModalError" class="modal" id="modal-error">
   <div class="error">
     <img src="../../../assets/error.png" alt="">
     {{textModal}}
