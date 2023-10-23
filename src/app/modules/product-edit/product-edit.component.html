@@ -1,13 +1,13 @@
 <div class="form-container" (submit)="onSubmit()" novalidate>
   <div class="form-title">
-    <h1>Formulario de Registro</h1>
+    <h1>{{ titleForm }}</h1>
   </div>
   <form class="product-form" [formGroup]="productForm">
     <div class="row">
       <div class="col">
         <label for="id">ID: </label>
-        <input type="text" formControlName="id">
-        <div class="error-message" *ngIf="productForm && productForm.get('id').errors && productForm.get('id').touched">
+        <input type="text" formControlName="id" id="id-input">
+        <div class="error-message" *ngIf="productForm && productForm.get('id').errors && productForm.get('id').touched" id="id-error">
           ID inválido!
         </div>
         <div class="error-message" *ngIf="idAlreadyExists">

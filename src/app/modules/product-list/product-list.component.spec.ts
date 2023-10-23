@@ -167,4 +167,110 @@ describe('ProductListComponent', () => {
 
     expect(navigateSpy).toHaveBeenCalledWith(['/products/edit'], { queryParams: { product: JSON.stringify(product) } })
   })
+
+  it('should filter', () => {
+
+    const expectRecords = [
+      {
+        "id": "test5",
+        "name": "LeapXMobile",
+        "description": "descripcionnn actualizada",
+        "logo": "nuevo logo editado",
+        "dateRelease": "2023-10-16T00:00:00.000+00:00",
+        "dateRevision": "2024-10-16T00:00:00.000+00:00"
+    }
+    ]
+
+    component.records = {
+      totalRecords: 8,
+      data: [
+        {
+            "id": "test5",
+            "name": "LeapXMobile",
+            "description": "descripcionnn actualizada",
+            "logo": "nuevo logo editado",
+            "dateRelease": "2023-10-16T00:00:00.000+00:00",
+            "dateRevision": "2024-10-16T00:00:00.000+00:00"
+        },
+        {
+            "id": "nnLARb62QQ",
+            "name": "31213123",
+            "description": "321213123123",
+            "logo": "321123123",
+            "dateRelease": "2023-10-20T00:00:00.000+00:00",
+            "dateRevision": "2024-10-19T00:00:00.000+00:00"
+        },
+        {
+            "id": "QnyctXfb0b",
+            "name": "8678687867",
+            "description": "867678678867",
+            "logo": "678678678867",
+            "dateRelease": "2023-10-20T00:00:00.000+00:00",
+            "dateRevision": "2024-10-19T00:00:00.000+00:00"
+        },
+        {
+            "id": "Vs643mAWkS",
+            "name": "Cuenta Corriente",
+            "description": "Sin descripción",
+            "logo": "https://seeklogo.com/images/B/banco-pichincha-vertical-letras-blancas-logo-CA207DAEA9-seeklogo.com.png",
+            "dateRelease": "2023-10-20T00:00:00.000+00:00",
+            "dateRevision": "2024-10-19T00:00:00.000+00:00"
+        },
+        {
+            "id": "YPyk323XQ5",
+            "name": "Product 1",
+            "description": "adsasdasdasdasd",
+            "logo": "312123213",
+            "dateRelease": "2023-10-21T00:00:00.000+00:00",
+            "dateRevision": "2024-10-20T00:00:00.000+00:00"
+        },
+        {
+            "id": "oEgQZB5ZyE",
+            "name": "Product 2",
+            "description": "32112323131231232",
+            "logo": "231213213123",
+            "dateRelease": "2023-10-21T00:00:00.000+00:00",
+            "dateRevision": "2024-10-20T00:00:00.000+00:00"
+        },
+        {
+            "id": "prueba2",
+            "name": "prueba nombre",
+            "description": "prueba desci",
+            "logo": "prueba logo",
+            "dateRelease": "2023-10-23T00:00:00.000+00:00",
+            "dateRevision": "2024-10-23T00:00:00.000+00:00"
+        },
+        {
+            "id": "test2",
+            "name": "nombretest2",
+            "description": "descripciontest2",
+            "logo": "logotest2",
+            "dateRelease": "2023-10-23T00:00:00.000+00:00",
+            "dateRevision": "2024-10-23T00:00:00.000+00:00"
+        }
+    ] as any[]
+    }
+
+    const product = {
+      id: "asdxx",
+      name: "nombrecito1",
+      description: "descripcion1",
+      logo: "logonuevo",
+      dateRelease: "2023-10-23T00:00:00.000+00:00",
+      dateRevision: "2024-10-23T00:00:00.000+00:00"
+    }
+
+    const event = {
+      target: {
+        value: "leap"
+      }
+    }
+
+    component.handleChange(event)
+    fixture.detectChanges()
+    setTimeout(() => {
+      const newRecords = component.records.data
+      expect(newRecords).toBe(expectRecords as unknown as any)
+    }, 500)
+  })
 });

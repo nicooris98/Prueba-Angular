@@ -22,6 +22,7 @@ export class ProductEditComponent implements OnInit {
   isCreate: boolean = true
   showModal: boolean = false
   textModal: string = "Producto creado correctamente"
+  titleForm: string = "Formulario de Registro"
 
   constructor(
     private activatedRoute: ActivatedRoute,
