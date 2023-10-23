@@ -6,6 +6,10 @@ Perfil Linkedin: [https://www.linkedin.com/in/nicolas-ysidoro-oris/]
 
 Proyecto hecho con Angular 16.2.2.
 
+## Instalar dependencias de angular
+
+Correr el comando `npm i`.
+
 ## Correr Proyecto
 
 Correr el comando `ng serve` e ir a `http://localhost:4200/`.
