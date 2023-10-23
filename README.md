@@ -1,5 +1,5 @@
-# Postulante
-Nicolas Ysidoro Oris
+# Postulante: Nicolas Ysidoro Oris
+
 Perfil Linkedin: [https://www.linkedin.com/in/nicolas-ysidoro-oris/]
 
 # FrontendBp
